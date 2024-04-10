@@ -1,0 +1,95 @@
+#include <iostream>
+#include <string>
+#define random(min,max) (min + rand() % (max - min + 1))
+using namespace std;
+
+const string CLASS[] = {"5A","3B", "8C", "2D", "4E","1K","7X"};
+const string NAME[] = { "KLARA","VALENTINA", "PLATINA", "XOXLOMA", "WEEKND","SASHA","POPA" };
+
+
+
+class Person {
+protected:
+    string name;
+    int age;
+
+public:
+
+    Person(string name, int age) {
+        this->name = name;
+        this->age = age;
+    }
+
+    void eat() {
+        cout << "Object had ate " << endl;
+    }
+
+    //void info() {
+    //    cout << "Name: " << name << endl;
+    //    cout << "Age: " << age << endl;
+    //    cout << endl;
+    //}
+
+};
+
+class Employee {
+protected:
+    double salary;
+
+public:
+
+    Employee(double salary) {
+        this->salary = salary;
+    }
+
+    void work() {
+        cout << "Employer had worked " << endl;
+    }
+
+    //void info() {
+    //    cout << "Salary: " << salary << endl;
+    //    cout << endl;
+    //}
+
+};
+
+class Teacher : public Person, public Employee {
+protected:
+    string group;
+public:
+    Teacher(string name, int age, double salary,string group) : Person(name, age), Employee(salary) {
+        this->group = group;
+    }
+
+    void info() {
+        cout << "Name: " << name << endl;
+        cout << "Age: " << age << endl;
+        cout << "Salary: " << salary << endl;
+        cout << "GROUP: " << group << endl;
+    }
+
+    
+
+};
+
+
+int main()
+{
+    srand(time(NULL));
+    Person pr1(NAME[random(0, 6)], random(0, 99));
+    Employee em1(random(10000,50000));
+    Teacher th1(NAME[random(0, 6)], random(0, 99), random(10000, 50000), CLASS[random(0,4)]);
+
+    //pr1.info();
+    pr1.eat();
+
+    cout << "------------------------------------------------------" << endl;
+
+   // em1.info();
+    em1.work();
+
+    cout << "------------------------------------------------------" << endl;
+
+    th1.info();
+
+}
