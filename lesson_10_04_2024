@@ -1,0 +1,109 @@
+#include <iostream>
+#include <string>
+#define random(min,max) (min + rand() % (max - min + 1))
+using namespace std;
+
+class Car {
+public:
+    string name;
+    int horsePower;
+
+    Car() {};
+
+    Car(string name, int horsePower) {
+        this->horsePower = horsePower;
+        this->name = name;
+    }
+
+    void drive() {
+        cout << "drive" << endl;
+    }
+
+    void info() {
+        cout << "Name: " << this->name << endl;
+        cout << "HP: " << this->horsePower << endl;
+        cout << "\n";
+    }
+};
+
+class ElectroCar : public Car {         //Наследование класса car(Всегда надо писать public). Наследование - когда один класс наследует поля и методы другого класса 
+public:
+    int charge;
+
+    ElectroCar(string name, int horsePower, int charge) : Car(name, horsePower) {               //Вызов метода другого класса 
+        this->charge = charge;
+    }
+
+    ElectroCar(int charge) {
+        this->charge = charge;
+    }
+
+    void info() {
+        Car::info();                                    //Вызов метода в другом классе 
+        cout << "charge: " << this->charge << endl;
+    }
+};
+
+class ICECar : public Car {
+public:
+    int fuel;
+
+    ICECar(string name, int horsePower, int fuel) : Car(name, horsePower) {
+        this->fuel = fuel;
+    }
+
+    ICECar(int fuel) {
+        this->fuel = fuel;
+    }
+
+    void info() {
+        Car::info();                                                    //Вызов метода в другом классе 
+        cout << "Engine Capacity: " << this->fuel << endl;
+    }
+
+};
+
+class HybridCar : public ElectroCar, public ICECar, public Car {
+public:
+
+    HybridCar(string name, int horsePower, int charge, int fuel) : Car(name,horsePower),ElectroCar(charge), ICECar(fuel) {
+
+    }
+
+    void info() {
+        cout << "Name: " << Car::name << endl;
+        cout << "HP: " << Car::horsePower << endl;
+        cout << "Charge: " << charge << endl;
+        cout << "Fuel: " << fuel << endl;
+
+    }
+
+};
+
+int main()
+{
+    srand(time(NULL));
+
+    Car car1("default car", 700);                                //Класс родитель 
+    ElectroCar electroCar1("Electrocar", 400, 1500);
+    ICECar icecar1("icecar", 800, 150);
+    HybridCar hybrid("hybridCar", 400, 2000, 100);
+
+    car1.info();
+    //car1.drive();
+
+    cout <<"------------------------------------------------------" << endl;
+
+    electroCar1.info();
+
+    cout << "------------------------------------------------------" << endl;
+
+    icecar1.info();
+
+    cout << "------------------------------------------------------" << endl;
+
+    hybrid.info();
+
+
+
+}
