@@ -1,0 +1,75 @@
+#include <iostream>
+#include <string>
+#define random(min,max) (min + rand() % (max - min + 1))
+using namespace std;
+
+const string CLASS[] = {"5A","3B", "8C", "2D", "4E","1K","7X"};
+const string NAME[] = { "KLARA","VALENTINA", "PLATINA", "XOXLOMA", "WEEKND","SASHA","POPA" };
+
+
+
+class Car {
+public:
+    int power;
+    int volume;
+    virtual void sound() {
+        cout << "Car did BEEP" << endl;
+    }
+
+    virtual void info() = 0;
+};
+
+class Sportcar : public Car {
+public:
+    int power;
+    Sportcar(int power) {
+        this->power = power;
+    }
+
+    void sound() {
+        cout << "Car did WRUUM" << endl;
+    }
+    void info() {
+        cout << "power " << power << endl;
+    }
+};
+
+class Truck : public Car {
+public:
+    int volume;
+    Truck(int volume) {
+        this->volume = volume;
+    }
+
+    void sound() {
+        cout << "Car did GAVGAV" << endl;
+    }
+    void info() {
+        cout << "volume " << volume << endl;
+    }
+};
+
+
+int main()
+{
+    srand(time(NULL));
+    
+    /*Car* car = new Sportcar();
+    car->sound();
+
+    cout << endl;
+
+    car = new Truck();
+    car->sound();*/
+
+    Car* car;
+    int choice;
+    cout << "Get choice of number" << endl;
+    cin >> choice;
+    cout << endl;
+    if (choice == 1) car = new Truck(500);
+    else car = new Sportcar(800);
+
+    //car->sound();
+    car->info();
+}
