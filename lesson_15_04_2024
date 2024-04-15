@@ -1,0 +1,108 @@
+#include <iostream>
+#include <string>
+#define random(min,max) (min + rand() % (max - min + 1))
+using namespace std;
+
+const string CLASS[] = {"5A","3B", "8C", "2D", "4E","1K","7X"};
+const string NAME[] = { "KLARA","VALENTINA", "PLATINA", "XOXLOMA", "WEEKND","SASHA","POPA" };
+
+
+
+class Weapon {
+public:
+    virtual void use() = 0;
+};
+
+class Gun : public Weapon
+{
+public:
+
+    virtual void use() {
+        cout << "BEBRA!" << endl;
+    }
+
+
+
+};
+
+class SubmachineGun : public Gun
+{
+public:
+    void use() {
+        cout << "BEBRA! BEBRA! BEBRA!" << endl;
+    }
+
+
+
+};
+
+class RPG : public Weapon
+{
+public:
+    void use() {
+        cout << "Boom!" << endl;
+    }
+};
+
+
+
+class Knife : public Weapon 
+{
+public:
+    void use() {
+        cout << "Cut!" << endl;
+    }
+};
+
+class Player
+{
+public:
+    Weapon* firstWeapon;
+    Weapon* secondWeapon;
+    Gun* pistolWeapon;
+    Knife* knifeWeapon;
+
+    Player(Weapon* firstWeapon,
+        Weapon* secondWeapon,
+        Gun* pistolWeapon,
+        Knife* knifeWeapon
+    ) {
+        this->firstWeapon = firstWeapon;
+        this->secondWeapon = secondWeapon;
+        this->pistolWeapon = pistolWeapon;
+        this->knifeWeapon = knifeWeapon;
+
+    }
+
+    void useFirstWeapon(Weapon* gun) {
+        this->firstWeapon->use();
+    }
+    void useSecondWeapon(Weapon* gun) {
+        this->secondWeapon->use();
+    }
+    void usePistolWeapon(Weapon* gun) {
+        this->pistolWeapon->use();
+    }
+    void useKnifeWeapon(Weapon* gun) {
+        this->knifeWeapon->use();
+    }
+
+};
+
+int main()
+{
+    srand(time(NULL));
+    
+    Gun gun1;
+    SubmachineGun gun2;
+    RPG gun3;
+    Knife gun4;
+    
+    Player player(&gun2, &gun3, &gun1, &gun4);
+    player.useFirstWeapon(&gun1);
+    player.useKnifeWeapon(&gun4);
+
+    
+
+
+}
