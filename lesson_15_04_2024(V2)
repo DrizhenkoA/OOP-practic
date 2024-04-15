@@ -1,0 +1,187 @@
+#include <iostream>
+#include <string>
+#define random(min,max) (min + rand() % (max - min + 1))
+using namespace std;
+
+const string CLASS[] = {"5A","3B", "8C", "2D", "4E","1K","7X"};
+const string NAME[] = { "KLARA","VALENTINA", "PLATINA", "XOXLOMA", "WEEKND","SASHA","POPA" };
+
+
+
+class Transport {
+public:
+    virtual void sound() = 0;
+    virtual void move() = 0;
+};
+
+class GroundTransport : public Transport
+{
+public:
+
+};
+
+class WaterTransport : public Transport
+{
+public:
+
+};
+
+class AirTransport : public Transport
+{
+public:
+
+};
+/////////////////////////////////////////////////////////////////GROUND TRANSPORT
+class Car : public GroundTransport
+{
+public:
+    int speed;
+    Car(int speed) {
+        this->speed = speed;
+    }
+
+    void sound() {
+        cout << "WRU WRUM WRUM (Car)" << endl;
+    }
+    void move() {
+        cout << "car is move" << endl;
+    }
+};
+
+class Bicycle : public GroundTransport
+{
+public:
+    string ringtone;
+    Bicycle(string ringtone) {
+        this->ringtone = ringtone;
+    }
+
+    void sound() {
+        cout << "TIK TIK TIK (Bicycle)" << endl;
+    }
+    void move() {
+        cout << "bicycle is move" << endl;
+    }
+};
+
+class Train : public GroundTransport
+{
+public:
+    int vagonKolvo;
+    Train(int vagonKolvo) {
+        this->vagonKolvo = vagonKolvo;
+    }
+    void sound() {
+        cout << "BJJ BJJBJBJBJ (Train)" << endl;
+    }
+    void move() {
+        cout << "train is move" << endl;
+    }
+};
+/////////////////////////////////////////////////////////////////WATER TRANSPORT
+class Submarine : public WaterTransport
+{
+public:
+    string number;
+    Submarine(string number) {
+        this->number = number;
+    }
+    void sound() {
+        cout << "AAAAAAAAAAAAAAAAAAOOOOOOOOOOO (Submarine)" << endl;
+    }
+    void move() {
+        cout << "submarine is move" << endl;
+    }
+};
+
+class Boat : public WaterTransport
+{
+public:
+    int lenght;
+    Boat(int lenght) {
+        this->lenght = lenght;
+    }
+
+    void sound() {
+        cout << "CKRCKRCKR (Boat)" << endl;
+    }
+    void move() {
+        cout << "boat is move" << endl;
+    }
+};
+/////////////////////////////////////////////////////////////////AIR TRANSPORT
+class Helicopter : public AirTransport
+{
+public:
+    string vehicleNumber;
+    Helicopter(string vehicleNubmer) {
+        this->vehicleNumber = vehicleNubmer;
+    }
+
+    void sound() {
+        cout << "FR FR FR FR (Helicopter)" << endl;
+    }
+    void move() {
+        cout << "helicopter is move" << endl;
+    }
+};
+
+class Plane : public AirTransport
+{
+public:
+    int passagerPlace;
+    Plane(int passagerPlace) {
+        this->passagerPlace = passagerPlace;
+    }
+
+    void sound() {
+        cout << "VUUUUUUUUUUUUUUUU VUUUUUUU (Plane)" << endl;
+    }
+    void move() {
+        cout << "plane is move" << endl;
+    }
+};
+
+
+class WaterParking
+{
+public:
+    string name;
+    WaterTransport** transports = new WaterTransport * [0];
+    int size = 0;
+
+    WaterParking(string name) {
+        this->name = name;
+    }
+
+    void addTransport(WaterTransport* transport) {
+        WaterTransport** buf = new WaterTransport * [size + 1];
+        for (int i = 0; i < size; i++) {
+            buf[i] = this->transports[i];
+        }
+        buf[size++] = transport;
+        delete[] this->transports;
+        this->transports = buf;
+    }
+
+    void info() {
+        for (int i = 0; i < size; i++) {
+            transports[i]->sound();
+        }
+    }
+};
+
+int main()
+{
+    srand(time(NULL));
+    WaterParking waterPark("XYETA");
+    Boat* t1 = new Boat(30);
+    Submarine* t2 = new Submarine("28");
+    Plane* t3 = new Plane(100);
+    Car* t4 = new Car(200);
+
+    waterPark.addTransport(t1);
+    waterPark.addTransport(t2);
+    waterPark.info();
+
+}
