@@ -1,0 +1,81 @@
+#include <iostream>
+#include <string>
+#define random(min,max) (min + rand() % (max - min + 1))
+using namespace std;
+
+class myString {
+private:
+    char* str;
+
+public:
+    myString() {
+        str = nullptr;
+    }
+
+    myString(const char* str) {
+        this->str = strCopy(str);
+    }
+
+    //str1 = str2 -----> str1;
+    myString& operator = (const myString& other) {
+        if (this->str != nullptr) {
+            delete[] this->str;
+        }
+        this->str = strCopy(other.str);
+        return *this;
+    }
+    //str1 + str2;
+    myString& operator + (const myString& other) {
+        char* newStr;
+        myString str3;
+        if (this->str != nullptr) {
+            delete[] this->str;
+        }
+        this->str = strCopy(other.str);
+
+        int lenght = strlen(this->str) + strlen(other.str);
+        newStr = new char[lenght + 1];
+        for (int i = 0;i < lenght;i++) {
+            newStr[i] = this->str[i];
+        }
+        for (int i = 0;i < lenght;i++) {
+            newStr[strlen(other.str) + i] = str[i];
+        }
+        newStr[lenght] = '\0';
+        str3.str = newStr;
+
+        return str3;
+    }
+
+
+    void print() {
+        cout << this->str;
+    } 
+
+    ~myString() {
+        delete[] this->str;
+    }
+
+private:
+    char* strCopy(const char* str) {
+        char* newStr;
+        int lenght = strlen(str);
+        newStr = new char[lenght + 1];
+        for (int i = 0;i < lenght;i++) {
+            this->str[i] = str[i];
+        }
+        this->str[lenght] = '\0';
+        return newStr;
+    }
+
+};
+
+int main()
+{
+    char* test = new char[5] {"1234"};
+    myString str1("test");
+    myString str2();
+    //str2.print();
+    
+
+}
