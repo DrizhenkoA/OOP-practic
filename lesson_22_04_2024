@@ -1,0 +1,173 @@
+#include <iostream>
+#include <string>
+#define random(min,max) (min + rand() % (max - min + 1))
+using namespace std;
+const int SIZE = 5;
+
+//Свой класс стринг 
+
+class MyString {
+private:
+    char* str;
+
+public:
+    MyString() {
+        str = nullptr;
+    }
+
+    MyString(const char* str) {
+        this->str = strCopy(str);
+    }
+
+    void operator +=(const MyString& other) {                   //  +=
+        int length1 = strlen(this->str);
+        int length2 = strlen(other.str);
+
+        char* newStr = new char[length1 + length2 + 1];
+        for (int i = 0;i < length1;i++) {
+            newStr[i] = this->str[i];
+        }
+        for (int i = 0;i < length2;i++) {
+            newStr[length1 + i] = other.str[i];
+        }
+        newStr[length1 + length2] = '\0';
+        delete[] this->str;
+        this->str = newStr;
+    }
+
+
+
+    MyString& operator =(const MyString& other) {           //str1 = str2 ---> str1d        =
+        if (this == &other) return *this;
+
+
+        if (this->str != nullptr) delete[]this->str;
+
+        this->str = strCopy(other.str);
+        return *this;               //Возвращание текущего элемента 
+    }
+
+    MyString& operator +(const MyString& str1) {                 //+
+        int length = strlen(str1.str) + strlen(this->str);
+        char* newStr = new char[length + 1];
+        MyString str3(newStr);
+        for (int i = 0; i < strlen(str1.str); i++)
+        {
+            newStr[i] = str1.str[i];
+        }
+
+        for (int i = strlen(str1.str); i < length; i++)
+        {
+            newStr[i] = this->str[i];
+        }
+
+        newStr[length] = '\0';
+
+        return str3;
+
+    }
+
+    MyString& operator + (const MyString& other)
+    {
+        MyString newStr;
+        newStr += *this;
+        newStr += other;
+        return newStr;
+    }
+    void print() {
+        cout << this->str;              //Массив чаров можно выводить без цикла
+    }
+
+    ~MyString() {
+        delete[]this->str;
+    }
+
+    int length() {
+        return strlen(this->str);
+    }
+
+    friend ostream& operator << (ostream& out, MyString& myStr) {
+    
+        out << myStr.str;
+        return out;
+    }
+
+    char& operator [](int index) {
+        if (index < this->length() && index >= 0) {
+            throw;
+            return this->str[index];
+        }
+    }
+
+    bool operator == (MyString& myStr) {
+        if (this->length() != myStr.length()) {
+            return false;
+        }
+
+        for (int i = 0;i < myStr.length();i++) {
+            if (this->str[i] != myStr.str[i]) return false;
+        }
+
+        return true;
+    }
+
+    bool operator != (MyString& myStr) {
+        if (this->length() != myStr.length()) {
+            return true;
+        }
+
+        for (int i = 0;i < myStr.length();i++) {
+            if (this->str[i] != myStr.str[i]) return true;
+        }
+
+        return false;
+
+    }
+
+    bool operator > (MyString & other) {
+        int length1 = strlen(this->str);
+        int length2 = strlen(other.str);
+        
+    }
+
+    /*bool operator < (MyString& other) {
+
+    }
+
+    bool operator >= (MyString & other) {
+
+    }
+
+    bool operator <= (MyString & other){
+
+    }*/
+
+
+private:
+    char* strCopy(const char* str) {
+        char* newStr;
+        int lenght = strlen(str);
+        newStr = new char[lenght + 1];
+        for (int i = 0;i < lenght;i++) {    
+            this->str[i] = str[i];
+        }
+        this->str[lenght] = '\0';
+        return newStr;
+    }
+
+};
+
+
+int main()
+{
+    setlocale(LC_ALL, "rus");
+    srand(time(NULL));
+
+    /*char* test = new char[] {"1234"};
+    MyString str1 = test;*/
+    MyString str1("Test1");
+    MyString str2("Test2");
+    MyString str3 = str1+str2;
+    /*cout << str3 << "==" << str1 << "+" << str2;*/
+    str3.print();
+}
