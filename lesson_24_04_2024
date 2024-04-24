@@ -1,0 +1,145 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+template <typename T>
+
+class MyList {
+private:
+    int capacity = 10;
+    int size = 0;
+    T* arr;
+
+public:
+    MyList() {
+        arr = new T[capacity];
+    }
+
+    ~MyList() {                         //деструктор листа
+        delete[] arr;
+    }
+
+    T& front() {            //выводит первый элемент
+        return arr[0];
+    }
+
+    T& back() {             //выводит последний элемент
+        return arr[size - 1];
+    }
+
+    bool empty() {
+        if (size > 0) return false;
+        return true;
+    }
+
+    int getSize() {
+        return size;
+    }
+
+    void push_back(T elem) {           //добавляет элемент в конец
+        increaseList();
+        arr[size++] = elem;
+    }
+
+    void push_front(T elem) {           //добавляет элемент в начало
+        insert(0,elem);
+    }
+
+    void insert(int index,T elem) {             //не может вставить в конец!
+        increaseList();
+        if (index >= size || index < 0) return;
+
+        for (int i = size;i >= index; i--) {
+            arr[i] = arr[i - 1];
+        }
+        arr[index] = elem;
+        size++;
+    }
+
+    void clear() {                        //очищает массив
+        this->capacity = 10;
+        this->size = 0;
+        delete[] arr;
+        arr = new T[capacity];
+        
+    }
+
+    void pop(int index) {                                      //удаляет элемент по индексу
+        if (index >= size || index < 0) return;
+        for (int i = index;i < size;i++) {
+            arr[i] = arr[i + 1];
+        }
+        size--;
+    }
+
+    void set(int index, T elem) {           //заменяет значение по индексу
+        if (index >= size || index < 0) return;
+        arr[index] = elem;
+    }
+
+    void popBack() {               //удаляет последний элемент 
+        size--;
+    }
+
+    void popFront() {               //удаляет первый элемент 
+        pop(0);
+    }
+
+    void insert_range(int index, T* array,int size2) {
+        if (index >= size || index < 0) return;
+        increaseList(size2);
+
+        for (int i = size;i >= index;i--) {
+            array[i + size2] = array[i];
+        }
+        for (int i = 0;i = size2;i++) {
+            array[index+i] = array[i];
+        }
+        size += size2;
+        
+    }
+
+    void show() {                       //показывает массив
+        for (int i = 0;i < size;i++) cout << arr[i] << " ";
+        cout << endl;
+    }
+
+
+
+private:
+    void increaseList(int count = 1) {                           //проверка не заполнен ли массив на 75%, если да - увеличивает его в 1.5 раза
+        if ((this->size + count) >= (this->capacity * 0.75)) {
+            this->capacity *= 1.5;
+            T* buf = new T[this->capacity];
+            for (int i = 0;i < size;i++) {
+                buf[i] = arr[i];
+            }
+            delete[] arr;
+            arr = buf;
+        }
+    }
+
+};
+
+int main()
+{
+    setlocale(LC_ALL, "rus");
+    srand(time(NULL));
+
+    MyList<int> list;
+
+    int* array = new int[] {1, 2, 3, 4, 5};
+    int size3 = _msize(array) / sizeof(array[0]);
+
+    list.push_back(1);
+    list.push_back(2);
+    list.push_back(3);
+    list.show();
+    //list.insert(3,7);
+    list.insert_range(2,array,size3);
+    list.show();
+
+
+
+}
+
