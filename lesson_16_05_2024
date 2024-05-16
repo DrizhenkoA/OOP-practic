@@ -1,0 +1,85 @@
+#include <iostream>
+#include <list>
+#define random(min,max) min + rand() % (max - min + 1)
+using namespace std;
+
+template <typename T>
+class MyBinaryTree
+{
+private:
+	class Node{
+    public:
+            T value;
+            Node* left;
+            Node* right;
+            Node(const T& value) : value(value), left(nullptr), right(nullptr) {};
+    };
+
+    Node* root;
+
+public:
+    MyBinaryTree() : root(nullptr) {}
+
+    void insert(const T& value) {
+        this->root = insertRecursive(root, value);
+    }
+
+    void show() {
+        showRecursive(this->root);
+    }
+
+    void clear() {
+        clearRecursive(root);
+    }
+
+
+private:
+
+    void clearRecursive(Node* node) {
+        if (node != nullptr) {
+            clearRecursive(node->left);
+            clearRecursive(node->right);
+            delete node;
+        }
+        root = nullptr;
+    }
+
+    void showRecursive(Node* node) {
+        if (node != nullptr) {
+            showRecursive(node->left);
+            cout << node->value << " ";
+            showRecursive(node->right);
+        }
+    }
+
+    Node* insertRecursive(Node* node, const T& value) {
+        if (node == nullptr) {
+            return new Node(value);
+        }
+        if (value < node->value) {
+            node->left = insertRecursive(node->left,value);
+        }
+        else if (value > node->value) {
+            node->right = insertRecursive(node->right, value);
+        }
+        return node;
+
+    }
+
+
+
+};
+
+int main()
+{
+    MyBinaryTree<int> tree;
+    tree.insert(10);
+    tree.insert(8);
+    tree.insert(5);
+    tree.insert(14);
+    tree.insert(52);
+    tree.insert(38);
+    tree.insert(40);
+    tree.show();
+
+}
