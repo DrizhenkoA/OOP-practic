@@ -1,0 +1,91 @@
+#include <iostream>
+#include <list>
+#define random(min,max) min + rand() % (max - min + 1)
+using namespace std;
+
+template <typename T, typename T2>
+
+class MyMap {
+private:
+    class Node {
+    public:
+        T key;
+        T2 value;
+        Node* left = nullptr;
+        Node* right = nullptr;
+        Node(T key, T2 value) : key(key), left(nullptr), right(nullptr), value(value) {};
+    };
+
+    Node* root = nullptr;
+
+public:
+    MyMap() : root(nullptr) {}
+
+    void insert(T key, T2 value) {
+        root = insertRecursive(this->root, key, value);
+    }
+
+    void show() {
+        showRecursive(this->root);
+    }
+
+    bool find(T key) {
+        Node* node = findRecursive(this->root, key);
+        if (node == nullptr) return false;
+        return true;
+    }
+
+    T2& operator [] (T key) {
+        Node* node = findRecursive(this->root, key);
+        if (node != nullptr) return node->value;
+        else throw out_of_range("not found");
+    }
+
+private:
+
+    void showRecursive(Node* node) {
+        if (node != nullptr) {
+            showRecursive(node->left);
+            cout << node->key << " : " << node->value << ", ";
+            showRecursive(node->right);
+        }
+    }
+
+    Node* insertRecursive(Node* node, T key, T2 value) {
+        if (node == nullptr) return new Node(key, value);
+        if (key < node->key) node->left = insertRecursive(node->left, key, value);
+        else if (key > node->key) node->right = insertRecursive(node->right, key, value);
+        return node;
+    }
+
+    Node* findRecursive(Node* node, T key) {
+        if (node == nullptr) return nullptr;
+        else if (node->key == key) return node;
+        else if (node->key > key) return findRecursive(node->left, key);
+        else if (node->key < key) return findRecursive(node->right, key);
+    }
+
+    void removeRecursive(const T& key) {
+
+    }
+
+
+};
+
+int main()
+{
+    MyMap<int, char> map;
+    map.insert(1, 'S');
+    map.insert(5, 'O');
+    map.insert(4, 'O');
+    map.insert(7, 'Q');
+    map.insert(10, 'A');
+    map.show();
+
+    cout << endl;
+    cout << endl;
+
+    cout << map.find(1) << endl;
+    
+    
+}
