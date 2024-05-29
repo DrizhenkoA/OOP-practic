@@ -1,0 +1,132 @@
+#include <iostream>
+#include <vector>
+#include <stack>
+#include <algorithm>
+
+using namespace std;
+
+class Ammo {
+protected:
+    int damage;
+public:
+    virtual int getDamage() = 0;
+};
+class Ammo556 : public Ammo { //abstract Ammo
+};
+
+class Ammo762 : public Ammo {
+};
+
+class Ammo919 : public Ammo {
+};
+
+
+
+class Ammo_5_56_BP : public Ammo556 { //concrete ammo
+public:
+    Ammo_5_56_BP(int damage) {
+        this->damage = damage;
+    };
+    int getDamage() { return this->damage; }
+};
+class Ammo_5_56_PS : public Ammo556 {
+public:
+    Ammo_5_56_PS(int damage) {
+        this->damage = damage;
+    };
+    int getDamage() { return this->damage; }
+};
+
+class Ammo_7_62_BP : public Ammo762 {
+public:
+    Ammo_7_62_BP(int damage) {
+        this->damage = damage;
+    };
+    int getDamage() { return this->damage; }
+};
+class Ammo_7_62_PS : public Ammo762 {
+public:
+    Ammo_7_62_PS(int damage) {
+        this->damage = damage;
+    };
+    int getDamage() { return this->damage; }
+};
+
+class Ammo_9_19_BP : public Ammo919 {
+public:
+    Ammo_9_19_BP(int damage) {
+        this->damage = damage;
+    };
+    int getDamage() { return this->damage; }
+};
+class Ammo_9_19PS : public Ammo919 {
+public:
+    Ammo_9_19PS(int damage) {
+        this->damage = damage;
+    };
+
+    int getDamage() { return this->damage; }
+};
+
+class Magazine {
+    virtual void load() = 0;
+    virtual void unload() = 0;
+public:
+};
+
+class Magazine_5_56 {
+    stack<Ammo556> bullets;
+public:
+};
+
+class Magazine_7_62 {
+    stack<Ammo556> bullets;
+public:
+};
+
+class Magazine_9_19 {
+    stack<Ammo556> bullets;
+public:
+};
+
+
+class Weapon {
+private:
+
+public:
+
+};
+
+
+class Human {
+private:
+
+public:
+
+
+};
+
+int main() {
+    //Ammo_5_56_BP ammo1(50);
+    //Ammo_5_56_PS ammo2(60);
+
+    //Ammo_7_62_BP ammo3(30);
+    //Ammo_7_62_PS ammo4(90);
+
+    //Ammo_9_19_BP ammo5(100);
+    //Ammo_9_19PS ammo6(20);
+
+
+
+    Ammo556* ammo1 = new Ammo_5_56_BP(100);
+    Ammo556* ammo2 = new Ammo_5_56_PS(60);
+
+    cout << ammo1->getDamage() << endl;
+    cout << ammo2->getDamage() << endl;
+    //cout << ammo3.getDamage() << endl;
+    //cout << ammo4.getDamage() << endl;
+    //cout << ammo5.getDamage() << endl;
+    //cout << ammo6.getDamage() << endl;
+
+
+}
