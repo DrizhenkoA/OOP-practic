@@ -1,0 +1,134 @@
+#include <iostream>
+#include <vector>
+#include <stack>
+#include <algorithm>
+
+using namespace std;
+
+//class Person {
+//    int id;
+//    string name;
+//public:
+//    Person(int id, string name) : id(id),name(name) {}
+//    string getName() {
+//        return this->name;
+//    }
+//    int getId() {
+//        return this->id;
+//    }
+//    void print() {
+//        cout << "Id : " << id << " " << "Name : " << name << endl;
+//    }
+//};
+
+
+int main()
+{
+    //[capture](parameters) -> void {
+        //fuction body
+    //}
+
+    /*int x = 10;
+    int y = 20;
+    auto add = [x,y](int a) {
+        return (x + y)*a;
+        };
+    
+    cout << add(5);*/
+
+    /*int x = 10;
+    cout << x << endl;
+    auto increment = [&x]() {
+        x++;
+        };
+    increment();
+    cout << x << endl;*/
+
+    //auto multiply = [](double a, double b) -> double {
+    //    return a * b;
+    //    };
+    //double result = multiply(3.5, 2.0);
+    //cout << "result = " << result;
+
+    
+    
+    //vector <int> numbers1 = { 1,2,3,4,5 };
+    //vector <int> numbers2 = { 6,7,8,9,10 };
+    //for (auto el : numbers) {
+    //    cout << el << " ";
+    //}
+    //cout << endl;
+
+    //auto inc = [](int& n) {
+    //    n++;
+    //    };
+
+    //for_each(numbers1.begin(), numbers1.end(),inc);
+    //for_each(numbers.begin(), numbers.end(), inc);
+    //
+    //for (auto el : numbers) {
+    //    cout << el << " ";
+    //}
+    //cout << endl;
+
+    //Person p1(1, "com");
+    //Person p2(2, "erta");
+    //Person p3(3, "tamara");
+    //Person p4(4, "aun");
+    //Person p5(5, "syka");
+
+    //vector <Person> people = { p2,p1,p3,p5,p4 };
+
+    //cout << endl << "Before" << endl;                                       //до сортировки
+    //for (Person p : people) {
+    //    p.print();
+    //}
+
+    //sort(people.begin(), people.end(), [](Person p1, Person p2) {
+    //    return p1.getId() <  p2.getId();
+    //    });
+    //
+    //cout << endl << "After" << endl;                                   //сортировка по айди
+    //for (Person p : people) {
+    //    p.print();
+    //}
+
+    //cout << endl << "After name sort" << endl;                             //сортировка по имени
+    //sort(people.begin(), people.end(), [](Person p1, Person p2) {
+    //    return p1.getName() < p2.getName();
+    //    });
+
+    //for (Person p : people) {
+    //    p.print();
+    //}
+
+    //vector <int> numbers = { 1,2,3,4,5,6,7,8,9,10 };                //1
+    //vector <int> numbers2 = {};
+
+    //copy_if(numbers.begin(), numbers.end(), back_inserter(numbers2),[](int n) {
+    //    return n % 2 == 0;
+    //    });
+
+    //for (auto el : numbers2) {
+    //    cout << el << " ";
+    //}
+
+    //cout << endl << endl << endl << endl;
+    //cout << endl << "Before" << endl;
+    //for (auto el : numbers) {
+    //    cout << el << " ";
+    //}
+
+    //transform(numbers.begin(), numbers.end(), back_inserter(numbers2), [](int n) {         //2
+    //    return n * 2;
+    //    });
+
+    //cout << endl << "after " << endl;
+    //for (auto el : numbers2) {
+    //    cout << el << " ";
+    //}
+    //cout << endl;
+
+
+
+}
