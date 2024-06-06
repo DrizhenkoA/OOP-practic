@@ -108,7 +108,7 @@ public:
     T unload() {
         if (bullets.empty()) {
             cout << "Magazine is empty" << endl;
-                return nullptr;
+            return nullptr;
         }
         T bullet = bullets.top();
         bullets.pop();
@@ -146,11 +146,34 @@ public:
 
 class Weapon {
 private:
+    int fireRate;
+    string name;
+    int damageMultiply;
+    int accuracy;
 
 public:
+    virtual void shoot() = 0;
+
 
 };
 
+class Rifle : public Weapon {
+public:
+
+
+};
+
+class Shotgun : public Weapon {
+public:
+
+
+};
+
+class Pistol : public Weapon {
+public:
+
+
+};
 
 class Human {
 private:
@@ -171,9 +194,9 @@ int main() {
     m5_56.info();
     m5_56.unload();
     m5_56.info();
-    
 
-    
+
+
 
     //Ammo_5_56_BP ammo1(50);
     //Ammo_5_56_PS ammo2(60);
@@ -197,7 +220,7 @@ int main() {
     //cout << ammo6.getDamage() << endl;
 
 
-    
+
 
 
 }
