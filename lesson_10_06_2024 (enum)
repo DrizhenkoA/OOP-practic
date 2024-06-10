@@ -1,0 +1,59 @@
+#include <iostream>
+
+using namespace std;
+
+
+
+
+class Road {
+public:
+	enum Speed {
+		LOW = 40,
+		MEDIUM = 60,
+		HIGH = 90,
+	};
+
+private:
+	string name;
+	Speed limit;
+
+public:
+	Road(string name,Speed limit) {
+		this->name = name;
+		this->limit = limit;
+	}
+
+	Speed getLimit() {
+		return limit;
+	}
+};
+
+//enum PCState {
+//	ON,
+//	OFF,
+//	GIBERNATION,
+//	SLEEP_MODE
+//};
+
+class PC {
+	
+
+};
+
+int main() 
+{
+	//PCState current_state = PCState::ON;
+	//if (current_state = PCState::OFF) {
+	//	cout << "PC is off" << endl;
+	//}
+
+	//else if (current_state = PCState::ON) {
+	//	cout << "PC is on" << endl;
+	//}
+
+
+	Road r1("City road", Road::Speed::MEDIUM);
+	cout << r1.getLimit();
+
+	
+}
