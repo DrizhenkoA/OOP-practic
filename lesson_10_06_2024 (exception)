@@ -1,0 +1,86 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+
+using namespace std;
+
+//throw out_of_range("MRKEMR")
+//throw ...
+
+class MyEx1 : public exception {
+private:
+	int dataState;
+
+public:
+	MyEx1(const char* msg, int dataState) : exception(msg){
+		this->dataState = dataState;
+	}
+
+	int getDataState () {
+		return dataState;
+	}
+};
+//////////////////////////////////////////////////////////////////////////
+class MyEx2 : public exception {
+public:
+	MyEx2(const char* msg) : exception(msg) {
+		
+	}
+};
+
+void foo(int num) {
+	if (num < 0) {
+	 //throw exception("Number below zero");
+	//throw ("Number below zero");
+		throw MyEx1("Number below zero", 1);
+	}
+	else if (num == 1) {
+		throw MyEx2("Error, number == 1");
+	}
+	cout << "Value = " << num;
+}
+
+int main() 
+{
+	//ifstream in;
+	//in.exceptions(ifstream::badbit | ifstream::failbit);
+
+	//try {
+	//	cout << "try to open file" << endl;
+	//	in.open("text1.txt");
+	//	cout << "File successfully open" << endl;;
+	//}
+	//catch (ifstream::failure& ex) {
+	//	cout << ex.what() << endl;
+	//	cout << ex.code() << endl;
+	//	cout << "Error" << endl;
+	//}
+
+	try {
+		foo(-34);
+	}
+
+
+	catch (MyEx2& ex) {
+		cout << "Block 1. We catch ex: " << ex.what() << endl;
+	}
+
+	catch (MyEx1 &ex){
+		cout << "Block 2. We catch ex: " << ex.what() << endl;
+		cout << "Error State: " << ex.getDataState() << endl;
+	}
+
+	catch (exception& ex) {
+		cout << "Block 0. We catch ex: " << ex.what() << endl;
+	}
+
+
+	//catch (const char* ex) {
+	//	cout << "Block 2. We catch ex: " << ex << endl;
+	//}
+	//catch (...) {
+	//	cout << "Block 3. We catch any ex: " << endl;
+	//}
+	
+	
+}
