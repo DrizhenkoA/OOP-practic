@@ -1,0 +1,106 @@
+#include <iostream>
+#include <sstream>
+#include <string>
+#include <vector>
+#include <stack>
+#include <fstream>
+#include <map>
+
+using namespace std;
+
+class ParkingLot;
+class ParkingTicket;
+class ParkingSpot;
+
+class Vehicle {
+private:
+	string licensePlate;		//Номерной знак
+	int vehicleId;				//Идентификатор транспортного средства
+	string vehicleType;			//Тип транспортного средства
+	Vehicle(string licensePlate, int vehicleId, string vehicleType) : licensePlate(licensePlate), vehicleId(vehicleId), vehicleType(vehicleType) {}
+protected:
+	//virtual int getVehicleId() = 0;
+	//virtual string getLicensePlate() = 0;
+	//virtual string getVehicleType() = 0;
+
+	int getVehicleId() {
+		return vehicleId;
+	}
+	void setVehicleId() {
+		this->vehicleId = vehicleId;
+	}
+
+	string getLicensePlate() {
+		return licensePlate;
+	}
+	void setLicensePlate() {
+		this->licensePlate = licensePlate;
+	}
+
+	string getVehicleType() {
+		return vehicleType;
+	}
+	void setVehicleType() {
+		this->vehicleType = vehicleType;
+	}
+};
+
+class LightCar {
+
+};
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+class ParkingSpot {
+private:
+	int spotId;				//Идентификатор парковочного места
+	bool isOccupied;		//Занятость парковочного места
+	string spotType;		//Тип парковочного места: обычное, VIP
+	ParkingSpot(int spotId, bool isOccupied, string spotType) : spotId(spotId), isOccupied(isOccupied), spotType(spotType) {}
+protected:
+
+};
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+class ParkingTicket {
+private:
+	int ticketId;			//Идентификатор билета
+	int vehicleId;			//Идентификатор транспортного средства
+	int spotId;				//Идентификатор парковочного места
+	time_t entryTime;		//Время въезда
+	time_t exitTime;		////Время выезда
+	ParkingTicket(int ticketId, int vehicleId, int spotId, time_t entryTime, time_t exitTime) : 
+		ticketId(ticketId), vehicleId(vehicleId), spotId(spotId) {}
+protected:
+};
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+class ParkingLot {
+private:
+	vector<ParkingSpot*> parkSpotVector;			//Список парковочных мест
+	vector<Vehicle*> vehicleVector;			//Список транспортных средств
+	vector<ParkingTicket*> parkingTicketVector;			//Список билетов
+public:
+	int addVehicle(Vehicle* vehicle) {
+		vehicleVector.push_back(vehicle);
+	}
+
+
+
+};
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+class ParkingFeeCalculator {
+private:
+	float hourlyRate;			//Почасовая ставка
+	float dailyRate;			//Суточная ставка
+	ParkingFeeCalculator(float hourlyRate, float dailyRate) : hourlyRate(hourlyRate), dailyRate(dailyRate)	 {}
+};
+
+int main()
+{
+   
+
+
+}
